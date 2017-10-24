@@ -20,9 +20,8 @@ def random_sampling_distri(num_obs, seeds):
             df['rand_num'] = np.random.random(df.shape[0])
             df['sample'] = np.where(df['rand_num'] <= 0.63, 'dev', 'val')
             summ = df.groupby(['sample']).agg({'ID': np.size, 'event': np.mean})
+            summ['num_ids'] = summ['ID'].sum()
             summary = summary.append(summ)
     return summary
 
 summary = random_sampling_distri(5000, 250)
-    
-        
